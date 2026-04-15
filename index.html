@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keqing Fan | Personal Homepage</title>
+  <style>
+    :root {
+      --text: #14213d;
+      --muted: #4f5d75;
+      --line: rgba(255, 255, 255, 0.22);
+      --glass: rgba(255, 255, 255, 0.18);
+      --glass-strong: rgba(255, 255, 255, 0.28);
+      --shadow: 0 18px 45px rgba(18, 35, 67, 0.18);
+      --accent: #274cbb;
+      --accent-soft: rgba(39, 76, 187, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.35), transparent 28%),
+        radial-gradient(circle at 80% 15%, rgba(130, 170, 255, 0.35), transparent 24%),
+        radial-gradient(circle at 78% 78%, rgba(255, 220, 160, 0.22), transparent 22%),
+        linear-gradient(135deg, #7fa8ff 0%, #9fc0ff 28%, #dbe8ff 55%, #edf3ff 100%);
+      background-attachment: fixed;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08));
+      pointer-events: none;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 22px;
+      right: 28px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(30, 51, 92, 0.14);
+    }
+
+    .topbar a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: 0.25s ease;
+    }
+
+    .topbar a:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .page {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 110px 28px 46px;
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .note-wrap {
+      position: sticky;
+      top: 98px;
+    }
+
+    .note {
+      position: relative;
+      padding: 26px 24px 24px;
+      border-radius: 32px;
+      background: var(--glass);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+    }
+
+    .avatar-box {
+      width: 140px;
+      height: 140px;
+      margin: 18px auto 18px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.45);
+      border: 1px solid rgba(255,255,255,0.42);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-placeholder {
+      color: #4a5568;
+      font-size: 14px;
+      padding: 16px;
+    }
+
+    .name {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      font-size: 14px;
+      color: #495057;
+      margin-bottom: 20px;
+    }
+
+    .contact-list {
+      position: relative;
+      z-index: 1;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-list li {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    .contact-list span {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #5a6475;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .contact-list a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .content {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 34px;
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .hero-text h1 {
+      font-size: 42px;
+      line-height: 1.16;
+      margin-bottom: 10px;
+    }
+
+    .hero-text p {
+      max-width: 720px;
+      font-size: 16px;
+      color: #24344d;
+    }
+
+    .hero-badge {
+      flex-shrink: 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.34);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .section {
+      margin-bottom: 20px;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.24);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .section:last-child {
+      margin-bottom: 0;
+    }
+
+    .section h2 {
+      font-size: 22px;
+      margin-bottom: 14px;
+      color: var(--accent);
+    }
+
+    .meta-grid,
+    .research-grid,
+    .publication-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .meta-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .meta-item,
+    .research-card,
+    .publication-item {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.36);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+    }
+
+    .meta-item span {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #55637d;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .research-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .research-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .research-card p,
+    .publication-item p,
+    .meta-item,
+    .section p,
+    .publication-note {
+      color: #27384f;
+      font-size: 15px;
+    }
+
+    .publication-item strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .publication-note {
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(39, 76, 187, 0.12);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 13px;
+      color: #50617d;
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+
+      .note-wrap {
+        position: static;
+      }
+
+      .note {
+        transform: none;
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        left: 18px;
+        right: 18px;
+        top: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .page {
+        padding: 108px 16px 28px;
+      }
+
+      .content {
+        padding: 18px;
+        border-radius: 24px;
+      }
+
+      .hero {
+        flex-direction: column;
+      }
+
+      .hero-text h1 {
+        font-size: 32px;
+      }
+
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main class="page">
+    <aside class="note-wrap">
+      <section class="note">
+        <div class="avatar-box">
+          <!-- Replace the line below with your own photo path, for example: <img src="photo.jpg" alt="Keqing Fan"> -->
+          <!-- <img src="photo.jpg" alt="Keqing Fan"> -->
+          <div class="avatar-placeholder">Profile Photo</div>
+        </div>
+
+        <div class="name">Keqing Fan</div>
+        <div class="subtitle">Direct Ph.D. Student, Jilin University</div>
+
+        <ul class="contact-list" id="contact">
+          <li>
+            <span>Email</span>
+            <a href="mailto:kqfan25@mails.jlu.edu.cn">kqfan25@mails.jlu.edu.cn</a>
+          </li>
+          <li>
+            <span>Affiliation</span>
+            Jilin University
+          </li>
+          <li>
+            <span>Location</span>
+            Changchun, Jilin, China
+          </li>
+          <li>
+            <span>Research</span>
+            Federated Learning, Privacy Protection, Fairness Debiasing
+          </li>
+        </ul>
+      </section>
+    </aside>
+
+    <section class="content">
+      <div class="hero">
+        <div class="hero-text">
+          <h1>Personal Homepage</h1>
+          <p>
+            I am a Direct Ph.D. student at Jilin University. My research focuses on federated learning, privacy-preserving machine learning, and fairness debiasing. I am interested in building trustworthy intelligent systems that are secure, robust, and socially responsible.
+          </p>
+        </div>
+        <div class="hero-badge">Academic Profile</div>
+      </div>
+
+      <section class="section" id="about">
+        <h2>Personal Information</h2>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span>Name</span>
+            Keqing Fan
+          </div>
+          <div class="meta-item">
+            <span>Current Program</span>
+            Direct Ph.D. Program, Class of 2025
+          </div>
+          <div class="meta-item">
+            <span>Institution</span>
+            Jilin University
+          </div>
+          <div class="meta-item">
+            <span>Undergraduate Education</span>
+            Jilin University
+          </div>
+        </div>
+        <div class="publication-note" style="margin-top: 16px;">
+          My academic interests lie in trustworthy machine learning, especially in distributed learning settings where privacy, fairness, and model reliability are critical.
+        </div>
+      </section>
+
+      <section class="section" id="research">
+        <h2>Research Interests</h2>
+        <div class="research-grid">
+          <article class="research-card">
+            <h3>Federated Learning</h3>
+            <p>
+              I study collaborative learning frameworks that allow multiple clients to train models without directly sharing raw data.
+            </p>
+          </article>
+          <article class="research-card">
+            <h3>Privacy Protection</h3>
+            <p>
+              I am interested in privacy-preserving methods that reduce information leakage and improve data security in distributed machine learning.
+            </p>
+          </article>
+          <article class="research-card">
+            <h3>Fairness Debiasing</h3>
+            <p>
+              My work also concerns identifying and mitigating algorithmic bias to improve fairness across users, groups, and real-world deployment scenarios.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="publications">
+        <h2>Publications</h2>
+        <div class="publication-list">
+          <div class="publication-item">
+            <strong>Selected Publications</strong>
+            <p>
+              Publication information will be updated here as my research progresses.
+            </p>
+          </div>
+          <div class="publication-item">
+            <strong>Research in Progress</strong>
+            <p>
+              Current topics include privacy-preserving federated learning and fairness-aware debiasing methods.
+            </p>
+          </div>
+        </div>
+        <div class="publication-note">
+          You can later replace this section with your papers in a standard academic format, such as: Author, Title, Venue, Year.
+        </div>
+      </section>
+
+      <div class="footer">
+        © 2026 Keqing Fan. All rights reserved.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
